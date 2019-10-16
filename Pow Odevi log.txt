@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <Math.h>
+
+void hesapla(float taban_1, float us_1)
+{
+        float sonuc=exp(us_1 * log(taban_1));
+        printf("Sonuç = %f \n\n",sonuc);
+}
+int main()
+{
+    while(1){
+         float taban,us;
+         printf("Tabanı giriniz \n");
+         scanf("%f",&taban);
+         printf("Üsü giriniz \n");
+         scanf("%f",&us);
+         hesapla(taban,us);
+         }
+
+    return 0;
+}
+
+
+
+
