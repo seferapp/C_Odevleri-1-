@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <Math.h>
+#include<conio.h>
+
+
+
+
+
+
+//15.10.2019 Abdurrahman sefer
+//Kullandığımız denklemler
+//problem  x^y     y=vurgulu sayı
+
+//n = y'nin kalanı 
+//d=1/(y-n)
+//sonuc=(x^n)*(x^(1/d))
+
+
+
+
+
+
+
+
+
+
+
+
+void powbulma(float taban,float us){
+float kalan=us-(int)(us/1) * 1;
+
+ float tutulan_sayi=taban;
+if(kalan!=0)
+{
+    int tam_sayi=us-kalan;
+            float kontrol;
+            double kok = taban;
+            for (int i = 0; i < taban; i++)
+            {
+                kok = (kok + (taban / kok)) *kalan;
+                kontrol = (float)kok;
+                if ((kontrol * kontrol) < kontrol)
+                    break;
+            }
+
+ for(int i=1;i<tam_sayi;i++){
+    taban=taban*tutulan_sayi;
+ }
+float sonuc=taban*kok;
+    printf("Sonuç = %f \n",sonuc);
+}else{
+
+for(int i=1;i<us;i++){
+    taban=taban*tutulan_sayi;
+ }
+ printf("Sonuç = %f \n",taban);
+}
+}
+
+int main()
+{
+    float taban,us;
+ printf("Tabanı giriniz \n");
+ scanf("%f",&taban);
+  printf("Üsü giriniz \n");
+ scanf("%f",&us);
+   powbulma(taban,us);
+    return 0;
+}
+
+
+
+
