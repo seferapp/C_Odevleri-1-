@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <Math.h>
+
+int main()
+{
+    float n=1.0*10;
+    float cikar=0.1*10;
+    
+    for(int i=0;i<10;i++)
+    {
+        n=n-cikar;
+    printf("x = %.100f\n", n);
+    }
+    if(n/10==0){
+        printf("ok");
+    }else{
+    printf("x = %.100f\n", n);}
+    return 0;
+}
+
+
+
+
