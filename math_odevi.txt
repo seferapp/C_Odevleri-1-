@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+
+ float a=1.0,b=2.0,c=3.0,d=4.0,e=5.0,f=6.0,g=7.0,h=8.0,x=9.0,y=10.0,z=11.0;
+  float sonuc=((1.0/(2.0*a*b))-((c*d)*((e*f-g)/(h))))/(x*(y+z));
+
+  printf("%f",sonuc);
+
+
+
+
+    return 0;
+}
