@@ -8,6 +8,9 @@ int saha[80][23]={0};
 
 int ates_x[100]={0};
 int ates_y[100]={0};
+
+int bomba_x[5]={0};
+int bomba_y[5]={0};
 int kuyrukSutun[500];
 int kuyrukSatir[500];
 int maap[80][23]={0};
@@ -68,10 +71,13 @@ int k,l;
 randomAta()
 {
     srand(time(NULL));
-    k=4+rand()%65;
-    l=4+rand()%15;
-
-
+    k=rand()%79;
+    for(int i=0;i<5;i++){
+        
+        if
+    }
+    
+    
 }
 void ates_et(int x){
 
@@ -132,11 +138,7 @@ void main()
             printf("..");
 
 for(int i=0;i<100;i++){
-if(ates_y[i]==1){
-    ates_x[i]=0;
-    ates_y[i]=0;
 
-}
     if(ates_x[i]!=0)
     {
          gotoxy(ates_x[i],ates_y[i]);
@@ -146,13 +148,18 @@ if(ates_y[i]==1){
          printf(".");
 
     }
-
+  if(ates_y[i]==3){
+   gotoxy(ates_x[i],ates_y[i]);
+   printf(" ");
+    gotoxy(ates_x[i],ates_y[i]-1);
+    printf(" ");
+    ates_x[i]=0;
+    ates_y[i]=0;
+   }
 }
 
         gotoxy(k,l);printf("0");
-
         Sleep(50);
-
         gotoxy(sx,22);printf(" ");
         gotoxy(sx+1,21);printf(" ");
 
@@ -168,9 +175,6 @@ if(ates_y[i]==1){
             printf(" ");
               gotoxy(kuyrukSutun[i]+3,kuyrukSatir[i]-1);
             printf(" ");
-
-
-
         }
         for(i=a;i>0;i--)
         {
