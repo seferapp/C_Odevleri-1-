@@ -1,0 +1,298 @@
+#include <stdio.h>
+#include <conio.h>
+#include <windows.h>
+#include <time.h>
+#include <stdlib.h>
+
+int saha[80][23]= {0};
+int ates_x[30]= {0};
+int ates_y[30]= {0};
+int bomba_x[10]= {0};
+int bomba_y[10]= {0};
+int batlama_x[10]= {0};
+int batlama_y[10]= {0};
+int kuyrukSutun[500];
+int kuyrukSatir[500];
+int maap[80][23]= {0};
+int bomba_sayisi=5;
+int ekran_yuksekligi=30;
+int ekran_genisligi=120;
+int do_sayac=0;
+int score=0;
+int toplam_atilan_bomba=0;
+int toplam_atilam_ates=0;
+int oyun_hizi=40;
+void gotoxy(short x, short y)
+{
+    HANDLE hConsoleOutput;
+    COORD Cursor_Pos = {x-1, y-1};
+    hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(hConsoleOutput, Cursor_Pos);
+}
+void cerceve()
+{
+    for(int i=1; i<=30; i++)
+    {
+        gotoxy(1,i);
+        printf("%c",179);
+        gotoxy(120,i);
+        printf("%c",179);
+    }
+    for(int i=2; i<120; i++)
+    {
+        gotoxy(i,30);
+        printf("%c",196);
+    }
+    gotoxy(1,30);
+    printf("%c",192);
+    gotoxy(120,30);
+    printf("%c",217);
+
+}
+long int k=0;
+randomAta()
+{
+
+    k=abs(4+rand()%90);
+    while(k<=4)
+    {
+        k=abs(4+rand()%90);
+    }
+    for(int i=0; i<bomba_sayisi; i++)
+    {
+        if(bomba_x[i]==0&&bomba_y[i]==0)
+        {
+            bomba_x[i]=abs(k);
+            bomba_y[i]=2;
+            toplam_atilan_bomba++;
+            break;
+        }
+    }
+}
+void ates_et(int x)
+{
+    for(int i=0; i<50; i++)
+    {
+        if(ates_x[i]==0)
+        {
+            ates_x[i]=x;
+            ates_y[i]=ekran_yuksekligi-1;
+            toplam_atilam_ates++;
+            break;
+        }
+    }
+}
+
+void main()
+{
+    randomAta();
+    //cerceve();
+    int sx=60,sy;
+    int dy=0,dx=0;
+    unsigned char tus;
+    int a=5;
+    long int sayac=0;
+
+
+
+    int devam=0;
+    int bomba_uret_random=5;
+    do
+    {
+        if(sayac%40000==0)
+        {
+            sayac=0;
+        }
+        if(kbhit())
+        {
+            tus=getch();
+            if(tus==224)
+            {
+                tus=getch();
+                switch(tus)
+                {
+
+                case 77:
+
+                    dx=1;
+                    dy=0;
+                    break;
+                case 75:
+
+                    dx=-1;
+                    dy=0;
+                    break;
+                case 72:
+                    ates_et(sx);
+                    break;
+                }
+            }
+        }
+        sx=sx+dx;
+        gotoxy(kuyrukSutun[0],kuyrukSatir[0]);
+        printf(" ");
+        sy=ekran_yuksekligi-1;
+        if(sx>ekran_genisligi-4)
+            sx=2;
+        if(sx<2)
+            sx=ekran_genisligi-4;
+        kuyrukSutun[0]=sx;
+        kuyrukSatir[0]=sy;
+        int i;
+        gotoxy(kuyrukSutun[0],kuyrukSatir[0]);
+        printf("%c",193);
+        if(sayac%bomba_uret_random==0)
+        {
+            k=50+rand()%100;
+            bomba_uret_random=abs(k);
+            randomAta();
+        }
+        if(sayac%oyun_hizi==0)
+        {
+            system("cls");
+            for(int bombalar=0; bombalar<bomba_sayisi; bombalar++)
+            {
+                if(bomba_x[bombalar]>0)
+                {
+                    if(bomba_y[bombalar]>=ekran_yuksekligi-1)
+                    {
+                        bomba_y[bombalar]=0;
+                        bomba_x[bombalar]=0;
+                        score--;
+                    }
+                    else
+                    {
+                        int gozler=0;
+                        int agiz=0;
+                        switch(bombalar)
+                        {
+                        case 0:
+                            printf("\033[0;32m");
+                            gozler=248;// o  iþatreti
+                            agiz=126;// yamuk tire iþareti
+                            break;
+                        case 1:
+                            printf("\033[0;33m");
+                            gozler=42;//yildiz iþareti
+                            agiz=45;
+                            break;
+                        case 2:
+                            printf("\033[0;34m");
+                            gozler=43; //+ iþareti
+                            agiz=44;
+                            break;
+                        case 3:
+                            printf("\033[0;35m");
+                            gozler=34; // tirnak iþareti
+                            agiz=46;
+                            break;
+                        case 4:
+                            printf("\033[0;36m");
+                            gozler=246;//bolme isareti
+                            agiz=95;
+                            break;
+                        }
+                        gotoxy(bomba_x[bombalar],bomba_y[bombalar]);
+                        printf("%c",agiz);
+                        gotoxy(bomba_x[bombalar]-1,bomba_y[bombalar]);
+                        printf("%c",gozler);
+                        gotoxy(bomba_x[bombalar]+1,bomba_y[bombalar]);
+                        printf("%c",gozler);
+                        gotoxy(bomba_x[bombalar]-2,bomba_y[bombalar]);
+                        printf("%c",40);
+                        gotoxy(bomba_x[bombalar]+2,bomba_y[bombalar]);
+                        printf("%c",41);
+                        printf("\033[0m");
+                        bomba_y[bombalar]++;
+                    }
+                }
+            }
+        }
+        int score_kontrol=0;
+        for(int mermi_i=0; mermi_i<50; mermi_i++)
+        {
+            if(ates_y[mermi_i]>0)
+            {
+                for(int bomba_i=0; bomba_i<bomba_sayisi; bomba_i++)
+                {
+                    if(ates_x[mermi_i]==bomba_x[bomba_i]||ates_x[mermi_i]==bomba_x[bomba_i]+1||ates_x[mermi_i]==bomba_x[bomba_i]-1||ates_x[mermi_i]==bomba_x[bomba_i]-2||ates_x[mermi_i]==bomba_x[bomba_i]+2)
+                    {
+                        if(ates_y[mermi_i]==bomba_y[bomba_i])
+                        {
+                            bomba_y[bomba_i]=0;
+                            bomba_x[bomba_i]=0;
+                            ates_x[mermi_i]=0;
+                            ates_y[mermi_i]=0;
+                            score++;
+                            score_kontrol=1;
+                        }
+                    }
+                    if(score_kontrol==1)
+                        break;
+                }
+            }
+            sayac++;
+        }
+        for( i=0; i<50; i++)
+        {
+            if(ates_x[i]>0)
+            {
+                gotoxy(ates_x[i],ates_y[i]);
+                printf(" ");
+                ates_y[i]--;
+                gotoxy(ates_x[i],ates_y[i]);
+                printf("^");
+            }
+            if(ates_y[i]==1)
+            {
+                gotoxy(ates_x[i],ates_y[i]);
+                ates_x[i]=0;
+                ates_y[i]=0;
+            }
+        }
+        for(i=a; i>0; i--)
+        {
+            kuyrukSutun[i]=kuyrukSutun[i-1];
+            kuyrukSatir[i]=kuyrukSatir[i-1];
+        }
+        gotoxy(108,1);
+        printf("Score :%d",score);
+        gotoxy(108,2);
+        printf("attacker :%d",toplam_atilan_bomba);
+        gotoxy(108,3);
+        printf("fire :%d",toplam_atilam_ates);
+        Sleep(50);
+        if(score>25&&score<50)
+        {
+            oyun_hizi=30;
+        }else if(score>50&&score<100){
+            oyun_hizi=20;
+        }else if(score>100&&score<150){
+         oyun_hizi=10;
+        }
+        if(score<0||score>=200)
+            break;
+    }
+    while (score>=0||score<200);
+    system("cls");
+    gotoxy(40,15);
+
+
+    if(score<0)
+    {
+        printf("Game over :(   Your Score=%d , total fire=%d , total attacker=%d",score,toplam_atilam_ates,toplam_atilan_bomba);
+    }
+    else
+    {
+        printf("Super you win the game    Your Score=%d,  total fire=%d ,total attacker=%d",score,toplam_atilam_ates,toplam_atilan_bomba);
+    }
+    while(1);
+
+
+
+
+
+
+
+
+}
