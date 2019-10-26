@@ -4,20 +4,17 @@
 #include <time.h>
 #include <stdlib.h>
 
-int saha[80][23]= {0};
 int ates_x[30]= {0};
 int ates_y[30]= {0};
 int bomba_x[10]= {0};
 int bomba_y[10]= {0};
-int batlama_x[10]= {0};
-int batlama_y[10]= {0};
+
 int kuyrukSutun[500];
 int kuyrukSatir[500];
-int maap[80][23]= {0};
+
 int bomba_sayisi=5;
 int ekran_yuksekligi=30;
 int ekran_genisligi=120;
-int do_sayac=0;
 int score=0;
 int toplam_atilan_bomba=0;
 int toplam_atilam_ates=0;
@@ -29,27 +26,8 @@ void gotoxy(short x, short y)
     hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(hConsoleOutput, Cursor_Pos);
 }
-void cerceve()
-{
-    for(int i=1; i<=30; i++)
-    {
-        gotoxy(1,i);
-        printf("%c",179);
-        gotoxy(120,i);
-        printf("%c",179);
-    }
-    for(int i=2; i<120; i++)
-    {
-        gotoxy(i,30);
-        printf("%c",196);
-    }
-    gotoxy(1,30);
-    printf("%c",192);
-    gotoxy(120,30);
-    printf("%c",217);
 
-}
-long int k=0;
+int k=0;
 randomAta()
 {
 
@@ -86,7 +64,6 @@ void ates_et(int x)
 void main()
 {
     randomAta();
-    //cerceve();
     int sx=60,sy;
     int dy=0,dx=0;
     unsigned char tus;
@@ -168,22 +145,22 @@ void main()
                         {
                         case 0:
                             printf("\033[0;32m");
-                            gozler=248;// o  iþatreti
-                            agiz=126;// yamuk tire iþareti
+                            gozler=248;// o  iÃ¾atreti
+                            agiz=126;// yamuk tire iÃ¾areti
                             break;
                         case 1:
                             printf("\033[0;33m");
-                            gozler=42;//yildiz iþareti
+                            gozler=42;//yildiz iÃ¾areti
                             agiz=45;
                             break;
                         case 2:
                             printf("\033[0;34m");
-                            gozler=43; //+ iþareti
+                            gozler=43; //+ iÃ¾areti
                             agiz=44;
                             break;
                         case 3:
                             printf("\033[0;35m");
-                            gozler=34; // tirnak iþareti
+                            gozler=34; // tirnak iÃ¾areti
                             agiz=46;
                             break;
                         case 4:
