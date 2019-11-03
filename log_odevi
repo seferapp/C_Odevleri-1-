@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <conio.h>
+
+int main()
+{
+    while(1)
+    {
+        float  x=0;
+        printf("Sayi giriniz \n");
+        scanf("%f",&x);
+        double eski_toplam = 0.0;
+        double denklem_1 = (x - 1) / (x + 1);
+        double denklem_2 = denklem_1 * denklem_1;
+        double sayac = 1.0;
+        double carpma = denklem_1;
+        double gecici = carpma;
+        double toplam = gecici;
+        while ( toplam != eski_toplam )
+        {
+            eski_toplam = toplam;
+            sayac += 2.0;
+            carpma *= denklem_2;
+            toplam += carpma / sayac;
+        }
+        printf(" log (%f)= %f \n",x,0.8685890000000000000f *toplam);
+    }
+    return 0;
+}
