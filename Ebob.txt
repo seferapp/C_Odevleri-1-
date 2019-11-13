@@ -1,0 +1,89 @@
+//normal for ile 
+#include < stdio.h >
+    int main(void) {
+        int sayi1;
+        int sayi2;
+        int ebob;
+        int kucuk;
+        int h;
+        printf("1.sayin");
+        scanf("%d", & sayi1);
+        printf("2.sayin");
+        scanf("%d", & sayi2);
+        if (sayi1 > sayi2) {
+            kucuk = sayi1;
+        } else {
+            kucuk = sayi2;
+        }
+        for (h = kucuk; h >= 1; h--) {
+            if ((sayi1 % h == 0) && (sayi2 % h == 0)) {
+                ebob = h;
+                break;
+            } else {
+                continue;
+            }
+        }
+        printf("EBOB %dn", ebob);
+        return 0;
+    }
+    
+    
+    //while ile
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+    int m,n,r;
+    printf("obebini hesaplamak istediginiz ilk sayiyi giriniz");
+    scanf("%d",&m);
+    printf("obebini hesaplamak istediginiz ikinci sayiyi giriniz");
+    scanf("%d",&n);
+    int buyuk,kucuk;
+    if(n>m)
+    {
+        buyuk=n;
+        kucuk=m;
+
+    }
+    else
+    {
+        buyuk=m;
+        kucuk=n;
+    }
+
+    while(kucuk!=0)
+    {
+        r=buyuk%kucuk;
+        buyuk=kucuk;
+        kucuk=r;
+    }
+    printf("sayilarin obebi = %d",buyuk);
+    return 0;
+
+}
+
+
+    //rekursife ile 
+ #include <stdio.h>
+int obeb(int, int);
+
+int main() {
+    int sayi1 = 945;
+    int sayi2 = 9702;
+    if(sayi1<sayi2){
+
+        int gecici=sayi1;
+        sayi1=sayi2;
+        sayi2=gecici;
+    }
+    int sonuc = obeb(sayi1, sayi2);
+    printf("obeb(%d,%d) = %d\n", sayi1, sayi2, sonuc);
+    return 0;
+}
+
+int obeb(int x, int y) {
+    if (y == 0)
+        return x;
+    return obeb(y, x % y);
+}
