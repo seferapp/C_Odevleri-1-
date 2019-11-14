@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int onceki=0;
+
+
+int main()
+{
+    float n=0.434343;
+    for(int i=0; i<100; i++)
+    {
+        float sonuc=n*147;
+        int tam_sayi=(int)sonuc;
+        n=sonuc-tam_sayi;
+        printf("%d\n",tam_sayi);
+    }
+
+
+
+    return 0;
+}
