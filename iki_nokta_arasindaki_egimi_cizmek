@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <conio.h>
+#include <windows.h>
+#include <time.h>
+#include <stdlib.h>
+void gotoxy(short x, short y)
+{
+    HANDLE hConsoleOutput;
+    COORD Cursor_Pos = {x-1, y-1};
+
+    hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(hConsoleOutput, Cursor_Pos);
+}
+int main()
+{
+    int x1=14,y1=14,x2=30,y2=30;
+    int m=((float)y2-y1)/(x2-x1);
+
+    for(int i=x1; i<=x2; i++)
+    {
+        int y=m*i-m*x1+y1;
+        gotoxy(i,y);
+        printf(".");
+    }
+
+
+
+    return 0;
+}
