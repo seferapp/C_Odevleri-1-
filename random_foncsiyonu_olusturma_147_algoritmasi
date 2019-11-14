@@ -4,20 +4,15 @@
 
 
 int onceki=0;
-
-
 int main()
 {
-    float n=0.434343;
+double n=((long)time(NULL)%50)/50.0;
     for(int i=0; i<100; i++)
-    {
-        float sonuc=n*147;
+   {
+       float sonuc=n*147;
         int tam_sayi=(int)sonuc;
         n=sonuc-tam_sayi;
         printf("%d\n",tam_sayi);
     }
-
-
-
     return 0;
 }
